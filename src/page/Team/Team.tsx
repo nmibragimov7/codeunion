@@ -10,7 +10,7 @@ import {getErrorMessage} from "@/shared/lib/getErrorMessage";
 import search from "@/shared/assets/svg/search.svg";
 
 const Team = () => {
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<User[]>();
     const {value, onChange} = useInput("");
     const [isModalOpened, setIsModalOpened] = useState(false);
     const [isModalRemoveOpened, setIsModalRemoveOpened] = useState(false);
