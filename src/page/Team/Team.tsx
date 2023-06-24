@@ -41,6 +41,8 @@ const Team = () => {
     }
     const debouncedCallback = useDebounce({cb: searchData, delay: 500});
     const onSave = (values: User) => {
+        console.log(values)
+        console.log(users)
         const data = [...users, values];
         setUsers(data);
         setIsModalOpened(false);
@@ -57,7 +59,7 @@ const Team = () => {
         if (value) {
             debouncedCallback(value);
         } else {
-            setUsers(response?.data);
+            setUsers(response?.data || []);
         }
     }, [value]);
     return (
