@@ -1,0 +1,60 @@
+.ant-layout-sider {
+    @apply !bg-gray-100 !rounded-tr-2xl !rounded-br-2xl;
+}
+
+.ant-layout-sider-trigger {
+    @apply !bg-gray-100;
+}
+
+.ant-layout-sider-trigger:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.ant-menu {
+    @apply !bg-gray-100 !text-gray-500 !rounded-none;
+}
+
+.ant-menu-item {
+    @apply !h-auto !flex !items-center;
+}
+
+.ant-menu-item-icon {
+    @apply !w-5;
+}
+
+.ant-menu-item:hover {
+    @apply !text-dark;
+}
+
+.ant-menu-item-selected {
+    background: rgba(0, 0, 0, 0.06) !important;
+    @apply !text-dark !rounded-none;
+}
+
+.anticon > svg {
+    fill: #C1C1CB !important;
+}
+
+.ant-modal-close-x svg {
+    fill: #C1C1CB !important;
+}
+
+.ant-btn-lg {
+    @apply !h-auto;
+}
+
+.ant-form-item-label > label {
+    @apply !h-auto;
+}
+
+.ant-form-item {
+    @apply !m-0;
+}
+
+.ant-checkbox-wrapper {
+    @apply !text-dark;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    @apply !bg-purple !border-purple;
+}
