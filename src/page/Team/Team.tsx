@@ -10,15 +10,17 @@ import {getErrorMessage} from "@/shared/lib/getErrorMessage";
 import search from "@/shared/assets/svg/search.svg";
 
 const Team = () => {
-    const [users, setUsers] = useState<User[]>();
+    const [initialUsers, setInitialUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     const {value, onChange} = useInput("");
     const [isModalOpened, setIsModalOpened] = useState(false);
     const [isModalRemoveOpened, setIsModalRemoveOpened] = useState(false);
-    const {data: response, isLoading, isFetching} = useQuery({
+    const {isLoading, isFetching} = useQuery({
         queryKey: [userService.KEY],
         onSuccess(response: any) {
             if (response?.data) {
                 setUsers(response?.data);
+                setInitialUsers(response?.data);
             }
         },
         onError(error: AxiosError) {
@@ -35,16 +37,15 @@ const Team = () => {
     });
     const searchData = (...args: any[]) => {
         const [value] = args;
-        const data: User[] = response?.data;
+        const data: User[] = [...initialUsers];
         const filteredData = data.filter(user => user.email.includes(value));
         setUsers(filteredData);
     }
-    const debouncedCallback = useDebounce({cb: searchData, delay: 500});
+    const debouncedCallback = useDebounce({cb: searchData, delay: 1000});
     const onSave = (values: User) => {
-        console.log(values)
-        console.log(users)
         const data = [...users, values];
         setUsers(data);
+        setInitialUsers(data);
         setIsModalOpened(false);
         notification.success({
             message: "Пользователь успешно добавлен",
@@ -53,13 +54,14 @@ const Team = () => {
     const onRemove = (user: User) => {
         const data = [...users].filter(u => u.email !== user.email);
         setUsers(data);
+        setInitialUsers(data);
         setIsModalRemoveOpened(true);
     }
     useEffect(() => {
         if (value) {
             debouncedCallback(value);
         } else {
-            setUsers(response?.data || []);
+            setUsers(initialUsers);
         }
     }, [value]);
     return (
